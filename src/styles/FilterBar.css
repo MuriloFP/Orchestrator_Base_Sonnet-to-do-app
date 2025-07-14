@@ -1,0 +1,297 @@
+/* FilterBar Component Styles */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) 0;
+  border-bottom: var(--border-width) solid var(--color-border-light);
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.filter-bar__stats {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.filter-bar__count {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.filter-bar__count-number {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  transition: all var(--transition-base);
+}
+
+.filter-bar__count-text {
+  font-weight: var(--font-weight-medium);
+}
+
+.filter-bar__filters {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background: var(--color-surface);
+  padding: var(--spacing-xs);
+  border-radius: var(--border-radius-lg);
+  border: var(--border-width) solid var(--color-border-light);
+}
+
+.filter-bar__filter {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-bar__filter::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color-primary);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  z-index: 0;
+}
+
+.filter-bar__filter-text,
+.filter-bar__filter-count {
+  position: relative;
+  z-index: 1;
+}
+
+.filter-bar__filter-count {
+  background: var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  padding: 2px var(--spacing-xs);
+  border-radius: var(--border-radius-sm);
+  min-width: 20px;
+  text-align: center;
+  transition: all var(--transition-base);
+}
+
+.filter-bar__filter:hover {
+  color: var(--color-primary);
+  background: rgba(0, 123, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.filter-bar__filter:hover .filter-bar__filter-count {
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+.filter-bar__filter:focus {
+  outline: var(--border-width-thick) solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.filter-bar__filter:active {
+  transform: translateY(0);
+}
+
+.filter-bar__filter--active {
+  color: var(--color-text-inverse);
+  background: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-bar__filter--active::before {
+  opacity: 1;
+}
+
+.filter-bar__filter--active .filter-bar__filter-count {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--color-text-inverse);
+}
+
+.filter-bar__filter--active:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+.filter-bar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.filter-bar__clear-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-danger);
+  background: transparent;
+  border: var(--border-width) solid var(--color-danger);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.filter-bar__clear-btn:hover {
+  color: var(--color-text-inverse);
+  background: var(--color-danger);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.filter-bar__clear-btn:focus {
+  outline: var(--border-width-thick) solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.filter-bar__clear-btn:active {
+  transform: translateY(0);
+}
+
+.filter-bar__clear-text {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 575px) {
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-sm);
+  }
+  
+  .filter-bar__stats {
+    justify-content: center;
+  }
+  
+  .filter-bar__filters {
+    justify-content: center;
+  }
+  
+  .filter-bar__filter {
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .filter-bar__actions {
+    justify-content: center;
+  }
+}
+
+@media (min-width: 576px) {
+  .filter-bar__clear-text {
+    display: inline;
+  }
+}
+
+@media (min-width: 768px) {
+  .filter-bar {
+    flex-wrap: nowrap;
+  }
+}
+
+/* Animation for count changes */
+@keyframes countPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.filter-bar__count-number--updated {
+  animation: countPulse 0.3s ease-out;
+}
+
+/* Animation for filter changes */
+@keyframes filterSlide {
+  from {
+    transform: translateX(-5px);
+    opacity: 0.7;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.filter-bar__filter--active {
+  animation: filterSlide var(--transition-base);
+}
+
+/* Empty state for actions */
+.filter-bar__actions:empty {
+  display: none;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .filter-bar__filters {
+    border-width: var(--border-width-thick);
+  }
+  
+  .filter-bar__filter {
+    border-width: var(--border-width);
+  }
+  
+  .filter-bar__filter--active {
+    border-color: var(--color-text-primary);
+  }
+  
+  .filter-bar__clear-btn {
+    border-width: var(--border-width-thick);
+  }
+}
+
+/* Loading state */
+.filter-bar--loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.filter-bar--loading .filter-bar__filter {
+  cursor: default;
+}
+
+/* Accessibility improvements */
+.filter-bar__filter[aria-selected="true"] {
+  position: relative;
+}
+
+.filter-bar__filter[aria-selected="true"]::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 50%;
+}

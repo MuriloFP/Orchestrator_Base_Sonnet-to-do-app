@@ -1,0 +1,163 @@
+/* TodoApp Component Styles */
+.todo-app {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: var(--spacing-lg) var(--container-padding);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.todo-app__container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  background: var(--color-background);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+  animation: scaleIn var(--transition-slow) var(--transition-bounce);
+}
+
+.todo-app__header {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #0056b3 100%);
+  color: var(--color-text-inverse);
+  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-lg);
+  text-align: center;
+  position: relative;
+}
+
+.todo-app__header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  pointer-events: none;
+}
+
+.todo-app__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  position: relative;
+  z-index: 1;
+}
+
+.todo-app__icon {
+  width: 32px;
+  height: 32px;
+  stroke-width: 2.5;
+  animation: bounce 2s infinite;
+}
+
+.todo-app__subtitle {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  margin: var(--spacing-xs) 0 0;
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
+}
+
+.todo-app__content {
+  padding: var(--spacing-xl);
+}
+
+.todo-app__list-container {
+  margin-top: var(--spacing-lg);
+}
+
+.todo-app__footer {
+  background: var(--color-surface);
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-top: var(--border-width) solid var(--color-border-light);
+  text-align: center;
+}
+
+.todo-app__footer-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 575px) {
+  .todo-app {
+    padding: var(--spacing-md) var(--spacing-sm);
+    align-items: flex-start;
+  }
+  
+  .todo-app__container {
+    border-radius: var(--border-radius-lg);
+  }
+  
+  .todo-app__header {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+  
+  .todo-app__title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .todo-app__content {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+  
+  .todo-app__footer {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  
+  .todo-app__footer-text {
+    font-size: var(--font-size-xs);
+  }
+}
+
+@media (min-width: 768px) {
+  .todo-app {
+    align-items: center;
+    padding: var(--spacing-2xl) var(--container-padding);
+  }
+}
+
+/* Animation for container entrance */
+@keyframes containerSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.todo-app__container {
+  animation: containerSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Loading state (if needed) */
+.todo-app--loading {
+  pointer-events: none;
+}
+
+.todo-app--loading .todo-app__container {
+  opacity: 0.7;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .todo-app__header {
+    background: var(--color-text-primary);
+    color: var(--color-background);
+  }
+  
+  .todo-app__container {
+    border: var(--border-width-thick) solid var(--color-text-primary);
+  }
+}

@@ -1,0 +1,212 @@
+/* TodoList Component Styles */
+.todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.todo-list-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2xl) var(--spacing-md);
+  text-align: center;
+  color: var(--color-text-muted);
+  animation: fadeIn var(--transition-slow);
+}
+
+.todo-list-empty__icon {
+  margin-bottom: var(--spacing-lg);
+  opacity: 0.6;
+  animation: float 3s ease-in-out infinite;
+}
+
+.todo-list-empty__icon svg {
+  width: 48px;
+  height: 48px;
+  stroke: var(--color-text-muted);
+  stroke-width: 1.5;
+}
+
+.todo-list-empty__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--spacing-sm);
+}
+
+.todo-list-empty__message {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+  max-width: 300px;
+}
+
+/* Animation for empty state icon */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* List animations */
+.todo-list {
+  animation: fadeIn var(--transition-base);
+}
+
+/* Staggered animation for list items */
+.todo-list .todo-item {
+  animation: slideInUp var(--transition-base);
+  animation-fill-mode: both;
+}
+
+.todo-list .todo-item:nth-child(1) { animation-delay: 0ms; }
+.todo-list .todo-item:nth-child(2) { animation-delay: 50ms; }
+.todo-list .todo-item:nth-child(3) { animation-delay: 100ms; }
+.todo-list .todo-item:nth-child(4) { animation-delay: 150ms; }
+.todo-list .todo-item:nth-child(5) { animation-delay: 200ms; }
+.todo-list .todo-item:nth-child(n+6) { animation-delay: 250ms; }
+
+/* Responsive adjustments */
+@media (max-width: 575px) {
+  .todo-list {
+    gap: var(--spacing-xs);
+  }
+  
+  .todo-list-empty {
+    padding: var(--spacing-xl) var(--spacing-sm);
+  }
+  
+  .todo-list-empty__icon svg {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .todo-list-empty__title {
+    font-size: var(--font-size-lg);
+  }
+  
+  .todo-list-empty__message {
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (min-width: 768px) {
+  .todo-list {
+    gap: var(--spacing-md);
+  }
+  
+  .todo-list-empty {
+    padding: var(--spacing-2xl);
+  }
+  
+  .todo-list-empty__icon svg {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* Loading state */
+.todo-list--loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.todo-list--loading .todo-item {
+  animation: none;
+}
+
+/* Filter transition animations */
+.todo-list--filtering {
+  transition: opacity var(--transition-base);
+}
+
+.todo-list--filtering .todo-item {
+  transition: all var(--transition-base);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .todo-list-empty__icon svg {
+    stroke: var(--color-text-primary);
+    stroke-width: 2;
+  }
+  
+  .todo-list-empty__title {
+    color: var(--color-text-primary);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .todo-list-empty__icon {
+    animation: none;
+  }
+  
+  .todo-list .todo-item {
+    animation: none;
+  }
+  
+  .todo-list .todo-item:nth-child(n) {
+    animation-delay: 0ms;
+  }
+}
+
+/* Accessibility improvements */
+.todo-list[aria-live="polite"] {
+  /* Ensure screen readers announce changes */
+}
+
+/* Custom scrollbar for long lists */
+.todo-list {
+  max-height: 60vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+.todo-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.todo-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.todo-list::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--border-radius);
+}
+
+.todo-list::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
+/* Focus management for keyboard navigation */
+.todo-list:focus-within {
+  outline: none;
+}
+
+/* Animation for list updates */
+@keyframes listUpdate {
+  0% {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.todo-list--updated {
+  animation: listUpdate var(--transition-base);
+}

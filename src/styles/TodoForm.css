@@ -1,0 +1,246 @@
+/* TodoForm Component Styles */
+.todo-form {
+  margin-bottom: var(--spacing-lg);
+}
+
+.todo-form__input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.todo-form__input {
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+  border: var(--border-width-thick) solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.todo-form__input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
+.todo-form__input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1), var(--shadow);
+  transform: translateY(-1px);
+}
+
+.todo-form__input:hover:not(:focus) {
+  border-color: var(--color-text-secondary);
+  box-shadow: var(--shadow);
+}
+
+.todo-form__input--error {
+  border-color: var(--color-danger);
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1), var(--shadow-sm);
+}
+
+.todo-form__input--error:focus {
+  border-color: var(--color-danger);
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15), var(--shadow);
+}
+
+.todo-form__actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.todo-form__btn {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.todo-form__btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left var(--transition-slow);
+}
+
+.todo-form__btn:hover::before {
+  left: 100%;
+}
+
+.todo-form__btn:focus {
+  outline: var(--border-width-thick) solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.todo-form__btn:active {
+  transform: translateY(1px);
+}
+
+.todo-form__btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.todo-form__btn:disabled::before {
+  display: none;
+}
+
+.todo-form__btn--submit {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
+  color: var(--color-text-inverse);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.todo-form__btn--submit:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--color-primary-hover) 0%, #004085 100%);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.todo-form__btn--cancel {
+  background: var(--color-background);
+  color: var(--color-text-secondary);
+  border-color: var(--color-border);
+}
+
+.todo-form__btn--cancel:hover {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  border-color: var(--color-text-secondary);
+  transform: translateY(-1px);
+}
+
+.todo-form__error {
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  margin-top: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: rgba(220, 53, 69, 0.1);
+  border: var(--border-width) solid rgba(220, 53, 69, 0.2);
+  border-radius: var(--border-radius);
+  animation: slideInUp var(--transition-base);
+}
+
+.todo-form__help {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+/* Responsive adjustments */
+@media (max-width: 575px) {
+  .todo-form__input {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-base);
+  }
+  
+  .todo-form__actions {
+    justify-content: stretch;
+  }
+  
+  .todo-form__btn {
+    flex: 1;
+    min-width: auto;
+  }
+}
+
+@media (min-width: 576px) {
+  .todo-form__input-group {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  
+  .todo-form__input {
+    flex: 1;
+  }
+  
+  .todo-form__actions {
+    flex-shrink: 0;
+    margin-left: var(--spacing-sm);
+  }
+}
+
+/* Animation for form appearance */
+.todo-form {
+  animation: fadeIn var(--transition-base);
+}
+
+/* Loading state */
+.todo-form--loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.todo-form--loading .todo-form__input {
+  background: var(--color-surface);
+}
+
+/* Success state animation */
+@keyframes inputSuccess {
+  0% {
+    border-color: var(--color-success);
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
+  }
+  100% {
+    border-color: var(--color-border);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+.todo-form__input--success {
+  animation: inputSuccess 0.6s ease-out;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .todo-form__input {
+    border-width: var(--border-width-thick);
+  }
+  
+  .todo-form__btn--submit {
+    background: var(--color-text-primary);
+    color: var(--color-background);
+    border-color: var(--color-text-primary);
+  }
+  
+  .todo-form__btn--cancel {
+    border-width: var(--border-width-thick);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .todo-form__input {
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+  
+  .todo-form__btn::before {
+    display: none;
+  }
+}
